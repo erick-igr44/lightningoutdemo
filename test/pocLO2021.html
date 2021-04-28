@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Importación cel script -->
+<script src="https://coppelmx--devcobros.my.salesforce.com/lightning/lightning.out.js"></script>
+
+<script type="text/javascript">
+   var interactionComponent;
+
+   $Lightning.use(
+      "c:InteractionDependencyApp", // appName: La dependency app que creamos en nuestro ambiente
+      function () {
+         $Lightning.createComponent(
+            "c:InteractionHandlerAura", // top-level component of your app
+            { message: "Mensaje desde página" }, // attributes to set on the component when created. Ponemos un mensaje solo como demostración
+            "interactionHandler", // the DOM location to insert the component
+            function (cmp) {
+               // Guardamos una referencia al componente con el que nos vamos a estar comunicando
+               interactionComponent = cmp;
+               // callback when component is created and active on the page
+               $A.eventService.addHandler({
+                  event: "c:InteractionResponseEvent",
+                  handler: getMessageFromLightning,
+               });
+            }
+         );
+      }, // callback: Función que se llama después de la inicialización
+      "https://coppelmx--devcobros.lightning.force.com", // lightningEndPointURI: La URL de Lightning para el ambiente en el que reside el LC
+      "00D040000008ftS!ARwAQDIT7OznRoEfYL7y.H.GKaZObrpc3RI2.Kvkk3ZSewuVrnfMf4ee1ilexD8h0QdMJm16T57U1VcTRZEc7h_xdaUQdMqW" // authToken: El tóken de autorización obtenido de nuestra instancia. Esto debe obtenerlo la app dinámicamente
+   );
+
+   //Function to call Lightning Component Function
+   var getMessageFromLightning = function (event) {
+      var message =
+         event.getParam("message1") + " - " + event.getParam("message2");
+
+      document.getElementById("messageFromLO").innerHTML = message;
+   };
+
+   function publishEvent() {
+      console.log(JSON.stringify(interactionComponent));
+      interactionComponent.receivePageMessages("Mensaje 1 desde la página", "Mensaje 2 desde la página")
+   };
+</script>
+
+<html>
+   <head>
+      <title>Coppel Demo de Lightning Out</title>
+   </head>
+
+   <body>
+      <table>
+         <tr>
+            <td>
+               <div id="interactionHandler" style="border: solid 5px orange" />
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p id="messageFromLO"></p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <button onclick="publishEvent()">
+                  Enviar mensaje al componente Lightning
+               </button>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>
