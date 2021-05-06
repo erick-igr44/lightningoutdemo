@@ -1,32 +1,7 @@
 <!DOCTYPE html>
 
 <script type="text/javascript">
-  function myOnload() {
-    document.getElementById("pageParameters").innerHTML = "Page parameters: " + window.location.search;
-  }
   
-  function initOAuth(){
-    console.trace('initSalesforce()');
-    const body = new FormData();
-
-    body.append('client_id', '3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgvE');
-    body.append('client_secret', '8E63D6C0740461EF08B0F26CD0C1A8956D936AB383D513CD1B74E2272671644D');
-    body.append('username', 'genesys.integracion@coppel.com.devcobros');
-    body.append('password', 'Coppel_2021RYf8HM7YEV4T1NTV7Z5vdnxZ');
-
-    const init = {
-      body: body,
-      method: 'POST'
-    };
-
-    fetch(salesforceUrl + 'https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
-        console.info(response);
-
-        if (response.status !== 200) {
-          console.error('Ocurrió un error al intentar autenticarse con Salesforce');
-        }
-     });
-  }
 </script>
 
 <html>
