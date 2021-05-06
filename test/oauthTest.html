@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 
 <script type="text/javascript">
+  function myOnload() {
+    document.getElementById("pageParameters").innerHTML = "Page parameters: " + window.location.search;
+  }
   
+  function initOAuth(){
+    alert('Hola!');
+  }
 </script>
 
 <html>
@@ -10,7 +16,7 @@
    </head>
 
    <body onload="myOnload()">
-      <p id="pageParameters"></p>
+     <p id="pageParameters"></p>
      <p><button onclick="initOAuth()">Iniciar OAuth flow</button></p>
      </p>
    </body>
