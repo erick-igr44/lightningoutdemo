@@ -19,7 +19,7 @@
       method: 'POST'
     };
 
-    fetch(salesforceUrl + 'https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
+    fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
         console.info(response);
 
         if (response.status !== 200) {
