@@ -23,6 +23,8 @@
 
     fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
         console.info(response);
+      
+        console.log(response.body);
 
         if (response.status !== 200) {
           console.error('Ocurrió un error al intentar autenticarse con Salesforce');
@@ -60,6 +62,35 @@
     
     window.location.href = redirectURL;
   }
+  
+  function getTokenFromAccessCode(){
+    var accessCode = decodeURIComponent(document.getElementbyId("oAccessCode");
+    const body = new FormData();
+
+    body.append('grant_type', 'authorization_code');
+    body.append('client_secret', '8E63D6C0740461EF08B0F26CD0C1A8956D936AB383D513CD1B74E2272671644D');
+    body.append('code', accessCode);
+    body.append('client_id', '3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgvE');
+    body.append('client_secret', '8E63D6C0740461EF08B0F26CD0C1A8956D936AB383D513CD1B74E2272671644D');
+    body.append('redirect_uri', 'https://erick-igr44.github.io/lightningoutdemo/test/oauthTest.html');
+    
+
+    const init = {
+      body: body,
+      method: 'POST',
+      mode: 'cors'
+    };
+
+    fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
+        console.info(response);
+      
+        console.log(response.body);
+
+        if (response.status !== 200) {
+          console.error('Ocurrió un error al intentar autenticarse con Salesforce');
+        }
+     });
+  }
 </script>
 
 <html>
@@ -74,5 +105,8 @@
        <button onclick="invokeSFAPI()">Invocar API SF</button></p>
      </p>
   <p><button onclick="initOAuthAccessCode()">Iniciar OAuth flow (access code)</button></p>
+  <p>Token: <input type="text" id="oAccessCode" name="oAccessCode"><br>
+       <button onclick="getTokenFromAccessCode()">Obtener token a partir de un access code</button></p>
+     </p>
    </body>
 </html>
