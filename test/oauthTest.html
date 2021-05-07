@@ -55,10 +55,10 @@
   
   function initOAuthAccessCode(){
     var redirectURL = "https://coppelmx--devcobros.my.salesforce.com/services/oauth2/authorize?client_id=" + 
-        "3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgv" + 
+        "3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgvE" + 
         "&redirect_uri=https://erick-igr44.github.io/lightningoutdemo/test/oauthTest.html" + "&response_type=code";
     
-    window.location.replace(redirectURL);
+    window.location.href = redirectURL;
   }
 </script>
 
