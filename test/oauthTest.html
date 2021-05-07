@@ -65,10 +65,10 @@
   
   function getTokenFromAccessCode(){
     var accessCode = decodeURIComponent(document.getElementById("oAccessCode").value);
+    console.debug(accessCode);
     const body = new FormData();
 
     body.append('grant_type', 'authorization_code');
-    body.append('client_secret', '8E63D6C0740461EF08B0F26CD0C1A8956D936AB383D513CD1B74E2272671644D');
     body.append('code', accessCode);
     body.append('client_id', '3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgvE');
     body.append('client_secret', '8E63D6C0740461EF08B0F26CD0C1A8956D936AB383D513CD1B74E2272671644D');
