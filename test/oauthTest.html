@@ -101,11 +101,14 @@
    <body onload="myOnload()">
      <p id="pageParameters"></p>
      <p>Usr: <input type="text" id="usr" name="usr"> Pwd: <input type="text" id="pwd" name="pwd"><button onclick="initOAuth()">Iniciar OAuth flow (user/pwd)</button></p>
+     <p>_______________________________________________________________</p>
      <p>Token: <input type="text" id="otoken" name="otoken"><br>
        <button onclick="invokeSFAPI()">Invocar API SF</button></p>
      </p>
+  <p>_______________________________________________________________</p>
   <p><button onclick="initOAuthAccessCode()">Iniciar OAuth flow (access code)</button></p>
-  <p>Token: <input type="text" id="oAccessCode" name="oAccessCode"><br>
+  <p>_______________________________________________________________</p>
+  <p>Access code: <input type="text" id="oAccessCode" name="oAccessCode"><br>
        <button onclick="getTokenFromAccessCode()">Obtener token a partir de un access code</button></p>
      </p>
    </body>
