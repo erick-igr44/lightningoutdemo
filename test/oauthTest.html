@@ -11,8 +11,8 @@
 
     body.append('client_id', '3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgvE');
     body.append('client_secret', '8E63D6C0740461EF08B0F26CD0C1A8956D936AB383D513CD1B74E2272671644D');
-    body.append('username', 'genesys.integracion@coppel.com.devcobros');
-    body.append('password', 'Coppel_2021RYf8HM7YEV4T1NTV7Z5vdnxZ');
+    body.append('username', document.getElementById('usr').value);
+    body.append('password', document.getElementById('pwd').value);
     body.append('grant_type', 'password');
 
     const init = {
@@ -35,7 +35,7 @@
     
     xhr.open("POST", 'https://coppelmx--devcobros.my.salesforce.com/services/apexrest/CallLocator', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', 'Bearer 00D0n0000009IVb!ARMAQKNHf4r1ya6HU5oSXbJPlzgzl0L7z0etNA5jPyMSE6s_UECcoAEl0fLSU5yM2TXBS_rwcvVW3DgTsGQBalv_jb.tUswp');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + document.getElementById("otoken").value);
     
     xhr.onreadystatechange = function() {
         console.log('**** ' + this.readyState + ', ' + this.status + ', ' + this.responseText);
@@ -52,6 +52,14 @@
          Plataforma : "Genesys"
     }));
   }
+  
+  function initOAuthAccessCode(){
+    var redirectURL = "https://coppelmx--devcobros.my.salesforce.com/services/oauth2/authorize?client_id=" + 
+        "3MVG99E3Ry5mh4zo9LEQC_bYevsI0tKJTqOxv8BYyxxc7BoiLcQlrtMxP2BM7skOdyOxa_UFFzXqeEVWbmgv" + 
+        "&redirect_uri=https://erick-igr44.github.io/lightningoutdemo/test/oauthTest.html" + "&response_type=code";
+    
+    window.location.replace(redirectURL);
+  }
 </script>
 
 <html>
@@ -61,8 +69,10 @@
 
    <body onload="myOnload()">
      <p id="pageParameters"></p>
-     <p><button onclick="initOAuth()">Iniciar OAuth flow</button></p>
-     <p><button onclick="invokeSFAPI()">Invocar API SF</button></p>
+     <p>Usr: <input type="text" id="usr" name="usr"> Pwd: <input type="text" id="pwd" name="pwd"><button onclick="initOAuth()">Iniciar OAuth flow (user/pwd)</button></p>
+     <p>Token: <input type="text" id="token" name="otoken"><br>
+       <button onclick="invokeSFAPI()">Invocar API SF</button></p>
      </p>
+  <p><button onclick="initOAuthAccessCode()">Iniciar OAuth flow (access code)</button></p>
    </body>
 </html>
