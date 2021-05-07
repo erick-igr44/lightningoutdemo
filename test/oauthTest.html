@@ -16,7 +16,11 @@
 
     const init = {
       body: body,
-      method: 'POST'
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
     };
 
     fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
@@ -28,13 +32,35 @@
      });
   }
   
+  function initOAuth2(){
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", 'https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', true);
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    
+    xhr.onreadystatechange = function() {
+        console.log('**** ' + this.readyState + ', ' + this.status + ', ' + this.responseText);
+    };
+    
+    xhr.send(JSON.stringify({
+        NumeroCliente : "900",
+         NumeroEmpleado : "900",
+         IdUsuario : "IdUsuario",
+         IdLlamada : "IdLlamada",
+         IdCampana : "IdCampana",
+         IdCola : "IdCola",
+         TokenAgente : "TokenAgente",
+         Plataforma : "Genesys"
+    }));
+  }
+  
   function invokeSFAPI(){
     var xhr = new XMLHttpRequest();
     
     xhr.open("POST", 'https://coppelmx--devcobros.my.salesforce.com/services/apexrest/CallLocator', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', 'Bearer 00D0n0000009IVb!ARMAQKNHf4r1ya6HU5oSXbJPlzgzl0L7z0etNA5jPyMSE6s_UECcoAEl0fLSU5yM2TXBS_rwcvVW3DgTsGQBalv_jb.tUswp');
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    //xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     
     xhr.onreadystatechange = function() {
         console.log('**** ' + this.readyState + ', ' + this.status + ', ' + this.responseText);
