@@ -24,7 +24,9 @@
     fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
         console.info(response);
       
-        console.log(response.body);
+        response.text().then(function(text) {
+          console.log('*** ' + text):
+        });
 
         if (response.status !== 200) {
           console.error('Ocurrió un error al intentar autenticarse con Salesforce');
@@ -84,7 +86,9 @@
     fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
         console.info(response);
       
-        console.log(response.body);
+        response.text().then(function(text) {
+          console.log('*** ' + text):
+        });
 
         if (response.status !== 200) {
           console.error('Ocurrió un error al intentar autenticarse con Salesforce');
