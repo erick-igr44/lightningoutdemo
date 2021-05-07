@@ -34,6 +34,7 @@
     xhr.open("POST", 'https://coppelmx--devcobros.my.salesforce.com/services/apexrest/CallLocator', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorizarion', 'Bearer 00D0n0000009IVb!ARMAQKNHf4r1ya6HU5oSXbJPlzgzl0L7z0etNA5jPyMSE6s_UECcoAEl0fLSU5yM2TXBS_rwcvVW3DgTsGQBalv_jb.tUswp');
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     
     xhr.onreadystatechange = function() {
         console.log('**** ' + this.readyState + ', ' + this.status + ', ' + this.responseText);
