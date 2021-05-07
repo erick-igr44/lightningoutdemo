@@ -64,7 +64,7 @@
   }
   
   function getTokenFromAccessCode(){
-    var accessCode = decodeURIComponent(document.getElementbyId("oAccessCode").value);
+    var accessCode = decodeURIComponent(document.getElementById("oAccessCode").value);
     const body = new FormData();
 
     body.append('grant_type', 'authorization_code');
