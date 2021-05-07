@@ -17,10 +17,7 @@
     const init = {
       body: body,
       method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
+      mode: 'cors'
     };
 
     fetch('https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', init).then(response => {
@@ -30,28 +27,6 @@
           console.error('Ocurrió un error al intentar autenticarse con Salesforce');
         }
      });
-  }
-  
-  function initOAuth2(){
-    var xhr = new XMLHttpRequest();
-    
-    xhr.open("GET", 'https://coppelmx--devcobros.my.salesforce.com/services/oauth2/token', true);
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-    
-    xhr.onreadystatechange = function() {
-        console.log('**** ' + this.readyState + ', ' + this.status + ', ' + this.responseText);
-    };
-    
-    xhr.send(JSON.stringify({
-        NumeroCliente : "900",
-         NumeroEmpleado : "900",
-         IdUsuario : "IdUsuario",
-         IdLlamada : "IdLlamada",
-         IdCampana : "IdCampana",
-         IdCola : "IdCola",
-         TokenAgente : "TokenAgente",
-         Plataforma : "Genesys"
-    }));
   }
   
   function invokeSFAPI(){
