@@ -44,8 +44,7 @@
 
    //Function to call Lightning Component Function
    var getMessageFromLightning = function (event) {
-      var message =
-         event.getParam("message1") + " - " + event.getParam("message2");
+      var message = event.getParam("endCallStatus");;
 
       document.getElementById("messageFromLO").innerHTML = message;
    };
