@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <!-- Importación cel script -->
-<script src="https://coppelmx--devcobros.my.salesforce.com/lightning/lightning.out.js"></script>
+<script src="https://coppelmx--devmr.my.salesforce.com/lightning/lightning.out.js"></script>
 
 <script type="text/javascript">
    var interactionComponent;
-
+   
    $Lightning.use(
       "c:InteractionDependencyApp", // appName: La dependency app que creamos en nuestro ambiente
       function () {
          $Lightning.createComponent(
-            "c:InteractionHandlerAura", // top-level component of your app
-            { message: "Mensaje desde página" }, // attributes to set on the component when created. Ponemos un mensaje solo como demostración
-            "interactionHandler", // the DOM location to insert the component
+            "c:executiveDashboard", // top-level component of your app
+            { }, // attributes to set on the component when created. Ningún mensaje
+            "executiveDashboard", // the DOM location to insert the component
             function (cmp) {
-               // Guardamos una referencia al componente con el que nos vamos a estar comunicando
-               interactionComponent = cmp;
-               // callback when component is created and active on the page
-               $A.eventService.addHandler({
-                  event: "c:InteractionResponseEvent",
-                  handler: getMessageFromLightning,
-               });
+               // Inicializamos el otro componente
+               $Lightning.use(
+                  "c:InteractionDependencyApp", // appName: La dependency app que creamos en nuestro ambiente
+                  function () {
+                     $Lightning.createComponent(
+                        "c:InteractionHandlerAura", // top-level component of your app
+                        { message: "Mensaje desde página" }, // attributes to set on the component when created. Ponemos un mensaje solo como demostración
+                        "interactionHandler", // the DOM location to insert the component
+                        function (cmp) {
+                           // Guardamos una referencia al componente con el que nos vamos a estar comunicando
+                           interactionComponent = cmp;
+                           // callback when component is created and active on the page
+                           $A.eventService.addHandler({
+                              event: "c:InteractionResponseEvent",
+                              handler: getMessageFromLightning,
+                           });
+                        }
+                     );
+                  }, // callback: Función que se llama después de la inicialización
+                  "https://coppelmx--devmr.lightning.force.com", // lightningEndPointURI: La URL de Lightning para el ambiente en el que reside el LC
+                  "00D010000008kUz!ARUAQMotPuxDg9Aj84ImHgwKCm7V.PFMMtgMzxqO9PRX9cfIJnlIwBnS4A3X1UYAbMugIVGfZwCjRPT600g4y8cyPQGCA7r9" // authToken: El tóken de autorización obtenido de nuestra instancia. Esto debe obtenerlo la app dinámicamente
+               );
             }
          );
       }, // callback: Función que se llama después de la inicialización
-      "https://coppelmx--devcobros.lightning.force.com", // lightningEndPointURI: La URL de Lightning para el ambiente en el que reside el LC
-      "00D040000008ftS!ARwAQH6oiCsHRH.E7j9Y2jq55PJwvdE7fpGS7.m6_zh_.CPoGWhM4rm3OIWH2J3BxuUyeM3n7hTeGuao.g9YaMxDNUWPRGAM" // authToken: El tóken de autorización obtenido de nuestra instancia. Esto debe obtenerlo la app dinámicamente
+      "https://coppelmx--devmr.lightning.force.com", // lightningEndPointURI: La URL de Lightning para el ambiente en el que reside el LC
+      "00D010000008kUz!ARUAQMotPuxDg9Aj84ImHgwKCm7V.PFMMtgMzxqO9PRX9cfIJnlIwBnS4A3X1UYAbMugIVGfZwCjRPT600g4y8cyPQGCA7r9" // authToken: El tóken de autorización obtenido de nuestra instancia. Esto debe obtenerlo la app dinámicamente
    );
 
    //Function to call Lightning Component Function
@@ -48,6 +63,11 @@
 
    <body>
       <table>
+         <tr>
+            <td>
+               <div id="executiveDashboard" style="border: solid 5px orange" />
+            </td>
+         </tr>
          <tr>
             <td>
                <div id="interactionHandler" style="border: solid 5px orange" />
